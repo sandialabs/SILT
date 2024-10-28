@@ -39,7 +39,7 @@ curation tasks:
 
 If you or your team used SILT, or if you have comments or feedback, please drop
 me a note!  
-Mattermost, Email, or Skype: kmlarso@sandia.gov
+Email: kmlarso@sandia.gov
 
 <!-- blank line -->
 <br>
@@ -158,8 +158,6 @@ silt
   attempt to update those keys to match the new style.  This may interfere with 
   any applications that ingest labels files.
 
-#### Older
-See the [CHANGELOG](https://cee-gitlab.sandia.gov/kmlarso/silt/-/blob/master/CHANGELOG.md).
 
 ---
 
