@@ -1,0 +1,46 @@
+{
+    "image_info": {
+	"data_path": "data"
+    },
+    "template_info": [
+	{
+	    "type": "combobox",
+	    "label": "Class",
+	    "options": [
+		"Building",
+		"Park",  
+		"Road"
+	    ]
+	},
+	{
+	    "type": "lineedit",
+	    "label": "Notes"
+	}
+    ],
+    "label_item_options": {
+	"line_width": 5.0,
+	"line_color": [
+	    0, 
+	    255, 
+	    255, 
+	    150
+	],
+	"vertex_diameter": 7.0,
+	"vertex_color": [
+	    0, 
+	    0, 
+	    255, 
+	    255
+	]
+    },
+    "outputs_options": {
+	"mask_label": "Class",
+	"include_mask": "false",
+	"default_output_keys": {
+	    "label_item_vertices": "polygon",
+	    "label_item_uuid": "featureID",
+	    "image_filename": "imageID"
+	},
+	"default_labels_extension": ".siltlabels.json"
+    }
+}

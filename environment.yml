@@ -1,0 +1,38 @@
+name: silt
+channels:
+  # - pytorch   # order these first
+  # - nvidia
+  - defaults
+  # - http://repo.anaconda.com/pkgs/main/
+  
+dependencies:  # TODO pin certain versions
+  - python=3.8
+  - numpy>=1.15  # < 2.0
+  - pyqt
+  - h5py>=2.8
+  - shapely >= 1.6.4
+  - pytest
+  - pytest-qt
+  - pytest-xvfb
+  - pytest-cov
+  - pytest-mock
+  - constructor
+  - scipy
+  - matplotlib
+  # - black
+  # - PyQt
+  # - shapely
+  
+  # - pip:
+  #     - ./silt
+
+  # Uncomment below for segment anything integration
+  # - opencv
+  # - pytorch>=1.7  # [unix]
+  # - torchvision >= 0.8 # [unix]
+  # - nvidia::cudatoolkit # [unix]
+
+  # Uncomment below for Active Contours
+  - scikit-image
+
+

@@ -1,0 +1,236 @@
+[
+  {
+    "Class": "Building",
+    "Subclass": {
+      "Residential": "true",
+      "Commercial": "false",
+      "Public": "false",
+      "Private": "true"
+    },
+    "Notes": "",
+    "label_item_type": "polygon",
+    "silt_version": "1.4.0",
+    "label_item_bounding_rect": [
+      [
+        97,
+        35
+      ],
+      [
+        199,
+        35
+      ],
+      [
+        199,
+        116
+      ],
+      [
+        97,
+        116
+      ]
+    ],
+    "featureID": "9d83f15c-8257-4e6b-9945-4bf79ed394c2",
+    "polygon": [
+      [
+        176.64,
+        64.64
+      ],
+      [
+        169.6,
+        80.0
+      ],
+      [
+        157.44,
+        73.6
+      ],
+      [
+        160.64,
+        61.44
+      ],
+      [
+        164.48,
+        51.2
+      ],
+      [
+        131.84,
+        35.2
+      ],
+      [
+        122.88,
+        56.32
+      ],
+      [
+        112.0,
+        49.28
+      ],
+      [
+        97.92,
+        74.88
+      ],
+      [
+        181.76,
+        115.84
+      ],
+      [
+        198.4,
+        74.88
+      ],
+      [
+        176.64,
+        64.64
+      ]
+    ],
+    "imageID": "HG_Aerial_ThumbPic1_with-checklist.h5"
+  },
+  {
+    "Class": "Building",
+    "Subclass": {
+      "Residential": "true",
+      "Commercial": "false",
+      "Public": "false",
+      "Private": "true"
+    },
+    "Notes": "",
+    "label_item_type": "polygon",
+    "silt_version": "1.4.0",
+    "label_item_bounding_rect": [
+      [
+        192,
+        92
+      ],
+      [
+        297,
+        92
+      ],
+      [
+        297,
+        178
+      ],
+      [
+        192,
+        178
+      ]
+    ],
+    "featureID": "3000ba52-0820-4c33-bf61-49fae02364c6",
+    "polygon": [
+      [
+        261.76,
+        92.8
+      ],
+      [
+        247.04,
+        122.24
+      ],
+      [
+        210.56,
+        106.24
+      ],
+      [
+        192.0,
+        143.36
+      ],
+      [
+        264.96,
+        177.28
+      ],
+      [
+        296.32,
+        108.8
+      ],
+      [
+        261.76,
+        92.8
+      ]
+    ],
+    "imageID": "HG_Aerial_ThumbPic1_with-checklist.h5"
+  },
+  {
+    "Class": "Road",
+    "Subclass": {
+      "Residential": "false",
+      "Commercial": "false",
+      "Public": "true",
+      "Private": "false"
+    },
+    "Notes": "",
+    "label_item_type": "polygon",
+    "silt_version": "1.4.0",
+    "label_item_bounding_rect": [
+      [
+        28,
+        227
+      ],
+      [
+        454,
+        227
+      ],
+      [
+        454,
+        378
+      ],
+      [
+        28,
+        378
+      ]
+    ],
+    "featureID": "21e97316-c2e7-46d0-a90f-6654c7087921",
+    "polygon": [
+      [
+        364.8,
+        314.88
+      ],
+      [
+        296.96,
+        286.08
+      ],
+      [
+        227.2,
+        262.4
+      ],
+      [
+        153.6,
+        243.84
+      ],
+      [
+        94.72,
+        232.96
+      ],
+      [
+        33.92,
+        227.2
+      ],
+      [
+        28.16,
+        246.4
+      ],
+      [
+        106.88,
+        255.36
+      ],
+      [
+        177.92,
+        269.44
+      ],
+      [
+        252.8,
+        290.56
+      ],
+      [
+        316.8,
+        314.88
+      ],
+      [
+        453.84,
+        377.16
+      ],
+      [
+        453.51,
+        353.89
+      ],
+      [
+        364.8,
+        314.88
+      ]
+    ],
+    "imageID": "HG_Aerial_ThumbPic1_with-checklist.h5"
+  }
+]

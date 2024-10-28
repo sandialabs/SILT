@@ -1,0 +1,12 @@
+
+channel_priority: strict
+channels:
+  - https://nexus.web.sandia.gov/repository/conda-proxy/main
+  - https://nexus.web.sandia.gov/repository/conda-forge-proxy
+
+allow_other_channels: false
+
+ssl_verify: {{SSL_VERIFY_PATH}}
+
+auto_update_conda: false
+

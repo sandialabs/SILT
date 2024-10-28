@@ -1,0 +1,41 @@
+{
+  "image_info": {
+    "data_path": "data"
+  },
+  "template_info": [
+    {
+      "type": "combobox",
+      "label": "Class",
+      "options": [
+        "Dirt",
+        "Rock",
+        "Tree"
+      ]
+    },
+    {
+      "type": "lineedit",
+      "label": "Notes"
+    }
+  ],
+  "label_item_options": {
+    "line_width": 5.0,
+    "line_color": [
+      0, 
+      255, 
+      255, 
+      150
+    ],
+    "vertex_diameter": 7.0,
+    "vertex_color": [
+      0, 
+      0, 
+      255, 
+      255
+    ]
+  },
+  "outputs_options": {
+    "include_mask": "true",
+    "mask_label": "Class",
+    "default_labels_extension": ".siltlabels.json"
+  }
+}

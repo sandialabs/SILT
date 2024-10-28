@@ -1,0 +1,17 @@
+name: silt
+company: Sandia National Laboratories
+initialize_conda: True
+pkg_name: silt
+version: {{full_version}}
+installer_type: all
+environment_file: ../../../environment.yml
+post_install: post_install.sh  # [unix]
+post_install: post_install.bat  # [win]
+extra_files:
+  - silt.tar.gz
+  - launch_silt.bat  # [win]
+  - run_tests.bat  # [win]
+  # Uncomment below for segment anything integration
+  # - ..\download_sam_ckpt.bat # [win]
+  # - ../download_sam_ckpt.sh # [unix]
+license_file: ../../../LICENSE

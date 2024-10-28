@@ -1,0 +1,6 @@
+templates/construct.yaml
+*.tar.gz
+*.zip
+tmp/
+silt-*.sh
+*.exe

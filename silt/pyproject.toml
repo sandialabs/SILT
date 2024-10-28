@@ -1,0 +1,32 @@
+#################################################################
+# Sandia National Labs
+# Date: 09-22-2020
+# Author: Kelsie Larson
+# Department: 05346
+# Contact: kmlarso@sandia.gov
+#
+# Python package setup for SILT application.
+#################################################################
+
+[build-system]
+requires = ["setuptools>=70.3.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "silt"
+description = "Sandia tool for labeling images."
+version = "2.2.0"
+authors = [{name="Kelsie Larson", email="kmlarso@sandia.gov"}]
+dependencies = ["pyqt5", "numpy", "h5py", "shapely", "scikit-image"]
+requires-python = ">=3.6,<3.9"
+
+[project.urls]
+Repository = "https://gitlab.sandia.gov/kmlarso/sandia-image-labeling-tool"
+
+[project.scripts]
+silt = "silt.silt:main"
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+]
