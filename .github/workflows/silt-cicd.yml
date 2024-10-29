@@ -20,6 +20,10 @@ jobs:
     name: Install Silt
     runs-on: ubuntu-latest
     steps:
+    - name: Check env
+      run: |
+        pwd
+        ls -la
     - name: Setup Miniconda
       uses: conda-incubator/setup-miniconda@v3.0.4
       with:
