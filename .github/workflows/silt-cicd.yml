@@ -1,0 +1,107 @@
+name: SILT CICD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  ANACONDA_INSTALLER: Anaconda3-2023.03-1-Linux-x86_64.sh
+  ANACONDA_URL: https://repo.anaconda.com/archive/${ANACONDA_INSTALLER}
+  SILT_ENV: silt
+
+jobs:
+  install_silt:
+    name: Install Silt
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install Anaconda
+      run: |
+        ANACONDA_DIR="$(echo ${GITHUB_WORKSPACE} | sed 's|builds||g')"
+        echo ${ANACONDA_DIR}
+        echo ${GITHUB_WORKSPACE} # TODO: find these env variables
+        ls -la ${ANACONDA_DIR}
+        if [[ ! -e ${ANACONDA_DIR}/anaconda3 ]]; then
+          if [[ ! -e ${ANACONDA_DIR}/${ANACONDA_INSTALLER} ]]; then
+            wget ${ANACONDA_URL} -O ${ANACONDA_DIR}/${ANACONDA_INSTALLER} &> /dev/null;
+          fi;
+          bash ${ANACONDA_DIR}/${ANACONDA_INSTALLER} -b -p ${ANACONDA_DIR}/anaconda3;
+          rm -rf ${ANACONDA_DIR}/${ANACONDA_INSTALLER};
+          ls -la ${ANACONDA_DIR}/;
+        fi
+    - name: Initiate Anaconda
+      run: |
+        source ${ANACONDA_DIR}/anaconda3/etc/profile.d/conda.sh
+        conda env list
+    - name: Create and activate the Anaconda environment
+      run: |
+        pwd
+        ls -la
+        if ! conda env list | cut -d " " -f1 | grep ^${SILT_ENV}$; then
+          conda env create --name ${SILT_ENV} --file environment.yml;
+        else
+          conda env remove -n ${SILT_ENV};
+          conda env create --name ${SILT_ENV} --file environment.yml;  
+        fi
+        conda activate ${SILT_ENV}
+    - name: Install SILT
+      run: |
+        pip install ./silt $PIP_FLAGS
+
+  unit_tests:
+    needs: [install_silt]
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+    - name: Run unit tests
+      run: |
+        ANACONDA_DIR="$(echo ${GITHUB_WORKSPACE} | sed 's|builds||g')"
+        source ${ANACONDA_DIR}/anaconda3/etc/profile.d/conda.sh
+        conda info --envs
+        conda activate ${SILT_ENV}
+        cd silt/test
+        pytest --cov=silt
+
+  package_bundle:
+    needs: [unit_tests]
+    name: Package Bundle
+    runs-on: ubuntu-latest
+    steps:
+    - name: Prepare environment
+      run: |
+        bash ${GITHUB_WORKSPACE}/utils/configure_conda.bash ${GITHUB_WORKSPACE}/condarc.template /home/gitlab-runner/.condarc
+        ANACONDA_DIR="$(echo ${GITHUB_WORKSPACE} | sed 's|builds||g')"
+        source ${ANACONDA_DIR}/anaconda3/etc/profile.d/conda.sh
+        conda activate ${SILT_ENV}
+    - name: Create tarball
+      run: |
+        make tarball_with_tests
+    - uses: actions/upload-artifact@v4
+      with:
+        name: silt-pkg.tar.gz
+        path: ./silt-pkg.tar.gz
+        
+  test_package_bundle:
+    needs: [package_bundle]
+    name: Test Package Bundle
+    runs-on: ubuntu-latest
+    steps:
+    - name: Prepare environment
+      run: |
+        bash ${GITHUB_WORKSPACE}/utils/configure_conda.bash ${CI_PROJECT_DIR}/condarc.template /home/gitlab-runner/.condarc
+        ANACONDA_DIR="$(echo ${GITHUB_WORKSPACE} | sed 's|builds||g')"
+        source ${ANACONDA_DIR}/anaconda3/etc/profile.d/conda.sh
+    - name: Test package
+      run: |
+        tar xf silt-pkg.tar.gz
+        cd silt-pkg/
+        tmpdir="$(mktemp -d)/silt"
+        ./silt*.sh -b -p ${tmpdir}
+        conda activate ${tmpdir}
+        pytest test/
+        rm -rf ${tmpdir}
