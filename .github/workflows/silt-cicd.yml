@@ -22,9 +22,8 @@ jobs:
     steps:
     - name: Install Anaconda
       run: |
-        ANACONDA_DIR="$(echo ${GITHUB_WORKSPACE} | sed 's|builds||g')"
+        ANACONDA_DIR="$(echo ${GITHUB_WORKSPACE})"
         echo ${ANACONDA_DIR}
-        echo ${GITHUB_WORKSPACE} # TODO: find these env variables
         ls -la ${ANACONDA_DIR}
         if [[ ! -e ${ANACONDA_DIR}/anaconda3 ]]; then
           if [[ ! -e ${ANACONDA_DIR}/${ANACONDA_INSTALLER} ]]; then
