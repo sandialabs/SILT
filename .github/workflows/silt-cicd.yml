@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Setup Miniconda
-    - uses: conda-incubator/setup-miniconda@v3.0.4
+      uses: conda-incubator/setup-miniconda@v3.0.4
       with:
         # If provided, this installer will be used instead of a miniconda installer, and cached based on its full URL Visit https://github.com/conda/constructor for more information on creating installers
         #installer-url: # optional, default is 
