@@ -15,19 +15,16 @@ env:
   ANACONDA_URL: https://repo.anaconda.com/archive/${ANACONDA_INSTALLER}
   SILT_ENV: silt
 
+defaults:
+      run:
+        shell: bash -el {0}
+        
 jobs:
   install_silt:
     name: Install Silt
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash -el {0}
     steps:
     - uses: actions/checkout@v4
-    - name: Check env
-      run: |
-        pwd
-        ls -la
     - name: Cache conda
       uses: actions/cache@v3
       env:
@@ -42,7 +39,6 @@ jobs:
       uses: conda-incubator/setup-miniconda@v3.0.4
       with:
         environment-file: ./environment.yml
-        # Environment name (or path) to activate on all shells. Default is `test` which will be created in `$CONDA/envs/test`. If an empty string is used, no environment is activated by default (For `base` activation see the `auto-activate-base` option). If the environment does not exist, it will be created and activated. If `environment-file` is used and you want that to be the environment used, you need to explicitely provide the name of that environment on `activate-environment`. If using sh/bash/cmd.exe shells please read the IMPORTANT! section on the README.md! to properly activate conda environments on these shells.
         activate-environment: ${{ env.SILT_ENV }}
         use-only-tar-bz2: true # IMPORTANT: This needs to be set for caching to work properly!
     - name: List conda environments
@@ -58,17 +54,11 @@ jobs:
     name: Unit Tests
     runs-on: ubuntu-latest
     steps:
-    - name: Check directory
-      run: |
-        ls -la
-    - name: List Ananconda environments
-      run: |
-        conda info --envs
+    - uses: actions/checkout@v4 
     - name: Setup Miniconda environment
       uses: conda-incubator/setup-miniconda@v3.0.4
       with:
         environment-file: ./environment.yml
-        # Environment name (or path) to activate on all shells. Default is `test` which will be created in `$CONDA/envs/test`. If an empty string is used, no environment is activated by default (For `base` activation see the `auto-activate-base` option). If the environment does not exist, it will be created and activated. If `environment-file` is used and you want that to be the environment used, you need to explicitely provide the name of that environment on `activate-environment`. If using sh/bash/cmd.exe shells please read the IMPORTANT! section on the README.md! to properly activate conda environments on these shells.
         activate-environment: ${{ env.SILT_ENV }}
         use-only-tar-bz2: true # IMPORTANT: This needs to be set for caching to work properly!
     - name: List conda environments
@@ -88,12 +78,16 @@ jobs:
     name: Package Bundle
     runs-on: ubuntu-latest
     steps:
-    - name: Prepare environment
+    - uses: actions/checkout@v4 
+    - name: Setup Miniconda environment
+      uses: conda-incubator/setup-miniconda@v3.0.4
+      with:
+        environment-file: ./environment.yml
+        activate-environment: ${{ env.SILT_ENV }}
+        use-only-tar-bz2: true # IMPORTANT: This needs to be set for caching to work properly!
+    - name: Install SILT
       run: |
-        bash ${GITHUB_WORKSPACE}/utils/configure_conda.bash ${GITHUB_WORKSPACE}/condarc.template /home/gitlab-runner/.condarc
-        ANACONDA_DIR="$(echo ${GITHUB_WORKSPACE} | sed 's|builds||g')"
-        source ${ANACONDA_DIR}/anaconda3/etc/profile.d/conda.sh
-        conda activate ${SILT_ENV}
+        pip install ./silt $PIP_FLAGS
     - name: Create tarball
       run: |
         make tarball_with_tests
