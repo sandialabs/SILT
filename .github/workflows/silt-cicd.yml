@@ -101,11 +101,11 @@ jobs:
     #     conda env list
     - name: List Ananconda environments
       run: |
-        conda info --envs
-    - name: Activate the Anaconda environment
-      run: |
-        conda init
-        conda activate $SILT_ENV
+        conda info
+    # - name: Activate the Anaconda environment
+    #   run: |
+    #     conda init
+    #     conda activate $SILT_ENV
     - name: Install SILT
       run: |
         pip install ./silt $PIP_FLAGS
