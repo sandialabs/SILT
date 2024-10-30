@@ -111,6 +111,7 @@ jobs:
         tmpdir="$(mktemp -d)/silt"
         ./silt*.sh -b -p ${tmpdir}
     - name: Activate conda env
+      run: |
         conda info
         conda activate ${tmpdir}
         conda list
