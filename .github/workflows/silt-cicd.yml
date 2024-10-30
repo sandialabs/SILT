@@ -43,7 +43,7 @@ jobs:
         # Environment.yml to create an environment. See https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-from-an-environment-yml-file for more information.
         environment-file: ./environment.yml
         # Environment name (or path) to activate on all shells. Default is `test` which will be created in `$CONDA/envs/test`. If an empty string is used, no environment is activated by default (For `base` activation see the `auto-activate-base` option). If the environment does not exist, it will be created and activated. If `environment-file` is used and you want that to be the environment used, you need to explicitely provide the name of that environment on `activate-environment`. If using sh/bash/cmd.exe shells please read the IMPORTANT! section on the README.md! to properly activate conda environments on these shells.
-        activate-environment: ${SILT_ENV}
+        activate-environment: ${{ env.SILT_ENV }}
         # Exact version of a Python version to use on "activate-environment". If provided, this will be installed before the "environment-file". See https://anaconda.org/anaconda/python for available "python" versions.
         # python-version: # optional, default is 
         # Conda configuration. When the channel alias is Anaconda.org or an Anaconda Server GUI, you can set the system configuration so that users automatically see private packages. Anaconda.org was formerly known as binstar.org. This uses the Anaconda command-line client, which you can install with conda install anaconda-client, to automatically add the token to the channel URLs. The default is "true". See https://docs.conda.io/projects/conda/en/latest/user-guide/configuration/use-condarc.html#add-anaconda-org-token-to-automatically-see-private-packages-add-anaconda-token for more information.
@@ -104,7 +104,8 @@ jobs:
         conda info --envs
     - name: Activate the Anaconda environment
       run: |
-        conda activate ${SILT_ENV}
+        conda init
+        conda activate $SILT_ENV
     - name: Install SILT
       run: |
         pip install ./silt $PIP_FLAGS
