@@ -95,27 +95,31 @@ jobs:
     - name: Create tarball
       run: |
         make tarball_with_tests
+    - name: check directory
+      run: |
+        ls
     - uses: actions/upload-artifact@v4
       with:
-        name: silt-pkg.tar.gz
-        path: ./silt-pkg.tar.gz
+        name: silt-pkg
+        path: ./pkg-output/silt-pkg.tar.gz
         
   test_package_bundle:
     needs: [package_bundle]
     name: Test Package Bundle
     runs-on: ubuntu-latest
     steps:
-    - name: Prepare environment
-      run: |
-        bash ${GITHUB_WORKSPACE}/utils/configure_conda.bash ${CI_PROJECT_DIR}/condarc.template /home/gitlab-runner/.condarc
-        ANACONDA_DIR="$(echo ${GITHUB_WORKSPACE} | sed 's|builds||g')"
-        source ${ANACONDA_DIR}/anaconda3/etc/profile.d/conda.sh
-    - name: Test package
+    - uses: actions/checkout@v4 
+    - name: Extract tar file
       run: |
         tar xf silt-pkg.tar.gz
+    - name: Run script
+      run: |
         cd silt-pkg/
+        ls
         tmpdir="$(mktemp -d)/silt"
         ./silt*.sh -b -p ${tmpdir}
+    - name: Test package
+      run: |
         conda activate ${tmpdir}
         pytest test/
         rm -rf ${tmpdir}
