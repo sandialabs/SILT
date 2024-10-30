@@ -101,14 +101,7 @@ jobs:
     - uses: actions/upload-artifact@v4
       with:
         name: silt-pkg
-        path: ./pkg-output/silt-pkg.tar.gz
-        
-  test_package_bundle:
-    needs: [package_bundle]
-    name: Test Package Bundle
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4 
+        path: ./silt-pkg.tar.gz
     - name: Extract tar file
       run: |
         tar xf silt-pkg.tar.gz
