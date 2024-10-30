@@ -112,10 +112,11 @@ jobs:
         ./silt*.sh -b -p ${tmpdir}
     - name: Activate conda env
       run: |
+        pwd
+        ls
         conda info
-        conda activate ${tmpdir}
         conda list
     - name: Test package
       run: |
-        pytest test/
+        pytest silt/test/
         rm -rf ${tmpdir}
