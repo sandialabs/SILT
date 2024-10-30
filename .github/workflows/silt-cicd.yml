@@ -99,16 +99,11 @@ jobs:
     #   run: |
     #     source ${ANACONDA_DIR}/anaconda3/etc/profile.d/conda.sh
     #     conda env list
-    - name: Create and activate the Anaconda environment
+    - name: List Ananconda environments
       run: |
-        pwd
-        ls -la
-        if ! conda env list | cut -d " " -f1 | grep ^${SILT_ENV}$; then
-          conda env create --name ${SILT_ENV} --file environment.yml;
-        else
-          conda env remove -n ${SILT_ENV};
-          conda env create --name ${SILT_ENV} --file environment.yml;  
-        fi
+        conda info --envs
+    - name: Activate the Anaconda environment
+      run: |
         conda activate ${SILT_ENV}
     - name: Install SILT
       run: |
@@ -119,12 +114,17 @@ jobs:
     name: Unit Tests
     runs-on: ubuntu-latest
     steps:
+    - name: Check directory
+      run: |
+        ls -la
+    - name: List Ananconda environments
+      run: |
+        conda info --envs
+    - name: Activate the Anaconda environment
+      run: |
+        conda activate ${SILT_ENV}
     - name: Run unit tests
       run: |
-        ANACONDA_DIR="$(echo ${GITHUB_WORKSPACE} | sed 's|builds||g')"
-        source ${ANACONDA_DIR}/anaconda3/etc/profile.d/conda.sh
-        conda info --envs
-        conda activate ${SILT_ENV}
         cd silt/test
         pytest --cov=silt
 
