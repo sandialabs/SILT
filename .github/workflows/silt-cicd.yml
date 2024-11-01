@@ -14,15 +14,14 @@ env:
   ANACONDA_INSTALLER: Anaconda3-2023.03-1-Linux-x86_64.sh
   ANACONDA_URL: https://repo.anaconda.com/archive/${ANACONDA_INSTALLER}
   SILT_ENV: silt
-
-defaults:
-      run:
-        shell: bash -el {0}
         
 jobs:
   install_silt:
     name: Install Silt
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
     steps:
     - uses: actions/checkout@v4
     - uses: dorny/paths-filter@v3
@@ -63,6 +62,9 @@ jobs:
     needs: [install_silt]
     name: Unit Tests
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
     steps:
     - uses: actions/checkout@v4 
     - name: Setup Miniconda environment
@@ -91,6 +93,9 @@ jobs:
     needs: [unit_tests]
     name: Package Bundle for Linux
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
     steps:
     - uses: actions/checkout@v4 
     - name: Setup Miniconda environment
@@ -139,6 +144,9 @@ jobs:
     needs: [unit_tests]
     name: Package Bundle for Windows
     runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
     steps:
     - uses: actions/checkout@v4 
     - name: Setup Miniconda environment
