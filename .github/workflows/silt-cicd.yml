@@ -77,9 +77,9 @@ jobs:
         cd silt/test
         pytest --cov=silt
 
-  package_bundle:
+  package_bundle_linux:
     needs: [unit_tests]
-    name: Package Bundle
+    name: Package Bundle for Linux
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4 
@@ -100,7 +100,7 @@ jobs:
         ls
     - uses: actions/upload-artifact@v4
       with:
-        name: silt-pkg
+        name: linux-silt-pkg
         path: ./silt-pkg.tar.gz
     - name: Extract tar file
       run: |
@@ -124,3 +124,52 @@ jobs:
       run: |
         pytest silt/test/
         rm -rf ${tmpdir}
+
+  package_bundle_windows:
+    needs: [unit_tests]
+    name: Package Bundle for Windows
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v4 
+    - name: Setup Miniconda environment
+      uses: conda-incubator/setup-miniconda@v3.0.4
+      with:
+        environment-file: ./environment.yml
+        activate-environment: ${{ env.SILT_ENV }}
+        use-only-tar-bz2: true # IMPORTANT: This needs to be set for caching to work properly!
+    - name: Install SILT
+      run: |
+        pip install ./silt $PIP_FLAGS
+    - name: Create tarball
+      run: |
+        .\make.bat constructor
+        .\make.bat make_tarball_with_tests
+    - name: check directory
+      run: |
+        ls
+    - uses: actions/upload-artifact@v4
+      with:
+        name: windows-silt-pkg
+        path: ./silt-pkg.tar.gz
+    # - name: Extract tar file
+    #   run: |
+    #     tar xf silt-pkg.tar.gz
+    # - name: Install silt
+    #   run: |
+    #     cd silt-pkg/
+    #     tmpdir="$(mktemp -d)/silt"
+    #     ./silt*.sh -b -p ${tmpdir}
+    # - name: Activate conda env
+    #   run: |
+    #     pwd
+    #     ls
+    #     conda info
+    #     conda list
+    # - name: Install xvfb
+    #   run: |
+    #     sudo apt-get install -y xvfb libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xinerama0 libxcb-xinput0 libxcb-xfixes0 libxcb-shape0 libglib2.0-0 libgl1-mesa-dev
+    #     sudo apt-get install '^libxcb.*-dev' libx11-xcb-dev libglu1-mesa-dev libxrender-dev libxi-dev libxkbcommon-dev libxkbcommon-x11-dev
+    # - name: Test package
+    #   run: |
+    #     pytest silt/test/
+    #     rm -rf ${tmpdir}
