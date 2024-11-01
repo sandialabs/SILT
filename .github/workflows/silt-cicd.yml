@@ -25,7 +25,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - uses: dorny/paths-filter@v3
+      id: changes
+      with:
+        filters: |
+          env:
+            - 'environment.yml'
     - name: Cache conda
+      if: steps.changes.outputs.env == 'true'
       uses: actions/cache@v3
       env:
         # Increase this value to reset cache if etc/example-environment.yml has not changed
@@ -36,16 +43,19 @@ jobs:
           ${{ runner.os }}-conda-${{ env.CACHE_NUMBER }}-${{
           hashFiles('etc/example-environment.yml') }}
     - name: Setup Miniconda environment
+      if: steps.changes.outputs.env == 'true'
       uses: conda-incubator/setup-miniconda@v3.0.4
       with:
         environment-file: ./environment.yml
         activate-environment: ${{ env.SILT_ENV }}
         use-only-tar-bz2: true # IMPORTANT: This needs to be set for caching to work properly!
     - name: List conda environments
+      if: steps.changes.outputs.env == 'true'
       run: |
         conda info
         conda list
     - name: Install SILT
+      if: steps.changes.outputs.env == 'true'
       run: |
         pip install ./silt $PIP_FLAGS
 
@@ -140,10 +150,14 @@ jobs:
     - name: Install SILT
       run: |
         pip install ./silt $PIP_FLAGS
+    - name: check directory
+      run: |
+        pwd
+        ls
     - name: Create tarball
       run: |
-        .\make.bat constructor
-        .\make.bat make_tarball_with_tests
+        make.bat constructor
+        make.bat make_tarball_with_tests
     - name: check directory
       run: |
         ls
