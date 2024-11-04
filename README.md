@@ -45,6 +45,49 @@ Email: kmlarso@sandia.gov
 <br>
 <!-- blank line -->
 
+# Package Installation
+
+To access the most recent package artifact builds, navigate to "Actions" -> select the most recent succesful workflow run -> scroll down to "Artifacts". Installers are available for Linux and Windows.
+
+## Windows Instructions through File Explorer:
+
+- Extract the folder:  
+  - Navigate to the `silt-pkg.tar.gz` file. Right Click it and select `Extract All` and choose where to unzip too (default is fine)
+- Run the installer:
+  - Enter the folder and execute (double click) the installation file. It should should look something like this:  
+  (e.g) `silt-2.2.0-Windows-x86_64.exe` (starts with "silt" and ends in ".exe")
+- Follow the prompts (defaults are fine) and take note of the installation path you chose. Wait for the installation to complete
+- Once done, open the installation folder in the File Explorer.
+  - The default installation directory is usually something like `C:\Users\<user>\AppData\Local\silt`
+- Find and run the silt program: Execute (double click) the `launch_silt.bat` file in the folder
+
+### Notes to keep in mind
+- Please do not move `launch_silt.bat` or `run_tests.bat` to a different location (moving the entire folder as a whole is okay).
+
+- (optionally) You may run the tests any time to make sure the program works properly. If you encounter errors, please try runing these tests: Execute `run_tests.bat` in the installation folder (done automatically on installation).
+
+
+## Unix (Linux) instructions through Command Line:
+Note: this assumes conda is already installed on your system before hand
+
+- Untar the zip and run the installer (this command runs `make untar` under the hood):  
+  `make install`
+
+
+- Activate the new conda environment that was just installed
+  Example using default config:
+  - `conda activate silt`
+<!-- - Windows: `conda activate ~\AppData\Local\silt` -->
+  - Debugging:
+    - Note: If that didn't work, run the following command and locate the path of the installed conda environment (It should have "silt" at the end of the path):  
+    `conda env list`
+    - Activate the conda environment you just found:
+    - `conda activate <env_path_from_above>`
+
+- Run the program to open the GUI: Simply run the new command `silt`
+
+
+# Repository Installation
 ## Prerequisites
 
 - python >= 3.6 and < 3.9
