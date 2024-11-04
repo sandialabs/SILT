@@ -165,7 +165,7 @@ jobs:
     - name: Create tarball
       run: |
         .\make.bat constructor
-        .\make.bat make_tarball_with_tests
+        .\make.bat tarball_with_tests
     - name: check directory
       run: |
         ls
