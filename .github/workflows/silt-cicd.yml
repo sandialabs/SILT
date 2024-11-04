@@ -153,19 +153,19 @@ jobs:
       uses: conda-incubator/setup-miniconda@v3.0.4
       with:
         environment-file: ./environment.yml
-        activate-environment: ${{ env.SILT_ENV }}
+        activate-environment: constructor
         use-only-tar-bz2: true # IMPORTANT: This needs to be set for caching to work properly!
     - name: Install SILT
       run: |
-        pip install ./silt $PIP_FLAGS
+        pip install .\silt $PIP_FLAGS
     - name: check directory
       run: |
         pwd
         ls
     - name: Create tarball
       run: |
-        make.bat constructor
-        make.bat make_tarball_with_tests
+        .\make.bat constructor
+        .\make.bat make_tarball_with_tests
     - name: check directory
       run: |
         ls
