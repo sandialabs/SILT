@@ -694,3 +694,4 @@ pytest
 ```
 
 If installed, and given your machine has Xvfb installed, the pytest-xvfb plugin will run tests with Xvfb by default, stopping windows from popping up while testing GUI components.
+
