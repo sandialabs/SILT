@@ -154,3 +154,16 @@ jobs:
       with:
         name: windows-silt-pkg
         path: ./silt-pkg.tar.gz
+
+  create_release:
+    runs-on: ubuntu-latest
+    needs: [package_bundle_linux, package_bundle_windows]
+    if: github.ref == 'refs/heads/main'
+    steps:
+    - name: Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          linux-silt-pkg
+          windows-silt-pkg
+    
