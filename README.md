@@ -47,7 +47,7 @@ Email: kmlarso@sandia.gov
 
 # Package Installation
 
-To access the most recent package artifact builds, navigate to "Actions" -> select the most recent succesful workflow run -> scroll down to "Artifacts". Installers are available for Linux and Windows.
+To access the most recent release, see "Releases" on the sidebar. Download the appropriate installer for your operating system.
 
 ## Windows Instructions through File Explorer:
 
@@ -141,7 +141,7 @@ Otherwise use the installer of your choice.
 1. Clone the repo
 
 ```bash
-git clone git@gitlab.sandia.gov:kmlarso/sandia-image-labeling-tool.git SILT
+git clone git@github.com:sandialabs/SILT.git SILT
 ```
 
 2. Change to top-level directory
