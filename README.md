@@ -62,6 +62,8 @@ To access the most recent release, see "Releases" on the sidebar. Download the a
 - Find and run the silt program: Execute (double click) the `launch_silt.bat` file in the folder
 
 ### Notes to keep in mind
+- You may encounter Conda errors when you run `launch_silt.bat` if Conda is not added to the PATH environment variable. To fix, you can either 1) add Conda to PATH (generally not recommended), or 2) open the "Anaconda Powershell Prompt" terminal, navigate to the default installation directory, and run `launch_silt.bat`. The script will then find Conda.
+
 - Please do not move `launch_silt.bat` or `run_tests.bat` to a different location (moving the entire folder as a whole is okay).
 
 - (optionally) You may run the tests any time to make sure the program works properly. If you encounter errors, please try runing these tests: Execute `run_tests.bat` in the installation folder (done automatically on installation).
