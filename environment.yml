@@ -20,6 +20,7 @@ dependencies:  # TODO pin certain versions
   - constructor
   - scipy
   - matplotlib
+  - setuptools
   # - black
   # - PyQt
   # - shapely
