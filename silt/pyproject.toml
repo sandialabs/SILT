@@ -17,11 +17,10 @@ name = "silt"
 description = "Sandia tool for labeling images."
 version = "2.2.0"
 authors = [{name="Kelsie Larson", email="kmlarso@sandia.gov"}]
-dependencies = ["pyqt5", "numpy", "h5py", "shapely", "scikit-image"]
+dependencies = ["pyqt5", "numpy", "h5py", "shapely", "scikit-image","setuptools"]
 requires-python = ">=3.6,<3.9"
 
 [project.urls]
-Repository = "https://gitlab.sandia.gov/kmlarso/sandia-image-labeling-tool"
 
 [project.scripts]
 silt = "silt.silt:main"
