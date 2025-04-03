@@ -35,7 +35,7 @@ fi
 # install segment anything for segmentation
 # pip install git+https://github.com/facebookresearch/segment-anything.git
 
-pip install --no-index ./silt
+pip install --no-index --no-build-isolation ./silt
 
 if [ $? -eq 0 ]; then
     echo "pip installed silt successfully"
