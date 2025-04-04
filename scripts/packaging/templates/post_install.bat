@@ -17,7 +17,7 @@ REM pip install torch torchvision --index-url https://download.pytorch.org/whl/c
 REM call "%PREFIX%\download_sam_ckpt.bat"
 REM pip install git+https://github.com/facebookresearch/segment-anything.git
 
-pip install ".\silt"
+pip install --no-index --no-build-isolation ".\silt"
 
 IF %ERRORLEVEL% EQU 0 (
     echo pip installed silt successfully
