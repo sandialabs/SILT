@@ -61,9 +61,6 @@ To access the most recent release, see "Releases" on the sidebar. Download the a
   - The default installation directory is usually something like `C:\Users\<user>\AppData\Local\silt`
 - Find and run the silt program: Execute (double click) the `launch_silt.bat` file in the folder
 
-### Notes to keep in mind
-- You may encounter Conda errors when you run `launch_silt.bat` if Conda is not added to the PATH environment variable. To fix, you can either 1) add Conda to PATH (generally not recommended), or 2) open the "Anaconda Powershell Prompt" terminal, navigate to the default installation directory, and run `launch_silt.bat`. The script will then find Conda.
-
 - Please do not move `launch_silt.bat` or `run_tests.bat` to a different location (moving the entire folder as a whole is okay).
 
 - (optionally) You may run the tests any time to make sure the program works properly. If you encounter errors, please try runing these tests: Execute `run_tests.bat` in the installation folder (done automatically on installation).
@@ -89,102 +86,13 @@ Note: this assumes conda is already installed on your system before hand
 - Run the program to open the GUI: Simply run the new command `silt`
 
 
-# Repository Installation
-## Prerequisites
-
-- python >= 3.6 and < 3.9
-- numpy >= 1.15
-- pyqt5
-- h5py >= 2.8
-- shapely >= 1.6.4
-- pytest >= 8.2.0
-- pytest-qt
-- pytest-xvfb
-- pytest-cov
-- pytest-mock
-- scipy
-
-*Note: the SILT package is set up to be installed with pip, therefore pip is 
-also a requirement; however, pip is included within Python installations for 
-Python versions >= 3.4.*
-
-*Note: the versions of the prerequisites listed here are based on what I've 
-personally tested.  SILT may still function with other versions... but I haven't
-tested it.*
-
-My recommendation is to use Anaconda environments.  See [https://docs.anaconda.com/anaconda/install/](https://docs.anaconda.com/anaconda/install/).
-
-I've had reports of issues installing PyQt5 outside of Anaconda environments.  If you choose not to use Anaconda, then 
-for Ubuntu, try:
-```bash
-sudo apt-get install python3-pyqt5
-```
-
-or for RHEL:
-```bash
-yum install PyQt5
-```
-
-on Windows with Python >= 3.6, I *think* you should be able to:
-```python
-pip install pyqt5
-```
-
-## Installation
-
-0. Install prerequisites
-
-If you're using Anaconda environments for Python, that's just:
-```bash
-conda install pyqt numpy h5py shapely pytest pytest-qt pytest-xvfb pytest-cov pytest-mock scipy
-```
-Otherwise use the installer of your choice.
-
-1. Clone the repo
-
-```bash
-git clone git@github.com:sandialabs/SILT.git SILT
-```
-
-2. Change to top-level directory
-
-```bash
-cd SILT
-```
-
-The directory structure should look like:
-
-```bash
-SILT
-├── preview/
-├── README.md
-├── sample_images/
-├── sample_templates/
-├── scripts/
-├── silt/
-...
-```
-
-3. Install silt
-
-This package is set up to be installed via pip:
-
-``` bash
-pip install ./silt
-```
-
-4. To run SILT, simply call 'silt' from the command line
-
-``` bash
-silt
-```
-
----
+# Installation
+SILT comes "batteries-included" which means that all the needed environments, libraries, and packages, come included. SILT is packaged using the Anaconda Constructor tool, which is the same packing tool that is used to distribute Anaconda itself. Since SILT is a fully packaged tool, it will not interact with your personal conda or python enviroments. SILT was designed to be be used in stand-alone systems, so it is all self contained.
 
 ## Recent Updates
 
-#### 2.2.0
-- Images can be loaded as an image pyramid, saving memory.
+#### 2.2.0 "Feldspar"
+- Images can be loaded as an image pyramid, saving memory. Minor issues fixed with the Windows and Linux Installers
 
 #### 2.1.0
 - Polygon lines no longer scale with the scene when zooming.
